@@ -8,7 +8,7 @@ import random
 
 #  START
 
-# house prices data (m2, price)
+# house prices data (suared meters, nr of bathrooms, price)
 data = [
     [50,2,200000],
     [43,1,150000],
