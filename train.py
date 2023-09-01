@@ -10,10 +10,10 @@ import random
 
 # house prices data (m2, price)
 data = [
-    [50,200000],
-    [43,150000],
-    [40,143000],
-    [60,220000]
+    [50,2,200000],
+    [43,1,150000],
+    [40,1,143000],
+    [60,2,220000]
     ]
 # list of number of neurons for each layer
 neuron_layers_length =[len(data),3,4,1]
