@@ -1,5 +1,14 @@
 import random
 
+#  IMPORTANT !!!!!!!!!!!!!!
+#  at this version I am calculating the values for the weights up until the last neuron layer and calculating the values of the last neuron layer. 
+# I still need to output the final result (the price) to complete forward propagation
+
+# after that I will need to calculate the cost function and then backpropagation
+
+
+#  START
+
 # house prices data (m2, price)
 data = [
     [50,200000],
