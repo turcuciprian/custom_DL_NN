@@ -7,8 +7,11 @@ data = [
     [40,143000],
     [60,220000]
     ]
+# list of number of neurons for each layer
 neuron_layers_length =[3,4,4,3]
+# list of all the weights for each neuron
 neuron_layers_weights = []
+# list of all the resulting values for each neuron
 neuron_layers_numbers = []
 
 
@@ -29,8 +32,11 @@ def calculate_neuron_layer_numbers():
         # instantiate current layer list values
         current_layer_values = []
         
+        # neuron count range
+        neuron_count_range = range(neuron_count)
+        
         # cyclre trought each neuron
-        for neuron in range(neuron_count):
+        for neuron in neuron_count_range:
         
         # initialise relu
             current_relu = 0
