@@ -10,7 +10,7 @@ import random
 
 # house prices data (suared meters, nr of bathrooms, price)
 data = [[50, 2, 200000], [43, 1, 150000], [40, 1, 143000], [60, 2, 220000]]
-input_layer_length = len(data[0]) - 1
+input_layer_length = len(data)
 # list of number of neurons for each layer
 neuron_layers_length = [input_layer_length, 3, 4, 1]
 
@@ -37,13 +37,16 @@ def set_neuron_layer_values(layer_length, input_layer):
 
 # .0
 def init_weights():
-    layer_weights_length = len(neuron_layers_length) - 1
-    for index, number_of_leyers in enumerate(neuron_layers_length):
+    for index, neurons_count in enumerate(neuron_layers_length):
         if index == 0:
             continue
+
+        columns = len(data[0]) - 1
+        previous_column_length = neuron_layers_length[index - 1]
+
         # istantiate current layer total number of weights
         total_weights_for_current_layer = (
-            number_of_leyers * neuron_layers_length[index - 1] * (len(data) - 1)
+            neurons_count * previous_column_length * columns
         )
         # random list of numbers from -1 to 1 (3 decimals)
         neuron_layers_weights.append(
