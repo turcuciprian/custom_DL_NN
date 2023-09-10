@@ -15,12 +15,14 @@ data = [
     [40,1,143000],
     [60,2,220000]
     ]
+input_layer_length = len(data[0])-1
 # list of number of neurons for each layer
-neuron_layers_length =[len(data),3,4,1]
-# list of all the weights for each neuron
+neuron_layers_length =[input_layer_length,3,4,1]
+
+# list of all the weights for each neuron (will be randomly generated)
 neuron_layers_weights = []
 # list of all the resulting values for each neuron
-neuron_layers_numbers = [[x[0] for x  in data]] # the first layer is the data itself
+neuron_layers_values = [[x[0] for x  in data]] # the first layer is the data itself
 
 def get_relu(values, weights):
     for value in values:
@@ -34,20 +36,42 @@ def set_neuron_layer_values(layer_length, input_layer):
         new_layer.append(get_relu(input_layer, neuron_layers_weights[neuron_index]))
         print('')
 
+# 1.
+def go_forward_trought_layers():
+    for cur_layer_index, current_layer_length in enumerate(neuron_layers_length):
+        prev_layer_index = cur_layer_index - 1
+        weight_index = 0
+        if cur_layer_index == 0:
+            # jumping the first layer because it is the input layer
+            continue
+        else:
+            # calculate relu for the current layer with the weights and neuron values from the previous layers
+            # do this neuron by neuron
+            print('processing each layer')
+            
+            
+
 def main():
     # initializing the script
     print('Starting...')
+    #  forwad propagation
+    go_forward_trought_layers()
     
-    # looping trough each neuron layer length list value
-    for _, number_of_leyers in enumerate(neuron_layers_length):
-        # setting the total number of weights for the current layer
-        total_weights_for_current_layer = number_of_leyers * len(data)
+    
+    
+    
+    
+    
+    # # looping trough each neuron layer length list value
+    # for _, number_of_leyers in enumerate(neuron_layers_length):
+    #     # setting the total number of weights for the current layer
+    #     total_weights_for_current_layer = number_of_leyers * len(data)
         
-        # generatuig random weights for the current layer and appending them to the neuron_layers_weights list
-        neuron_layers_weights.append([round(random.uniform(-1.00,1.00) * 1000)/1000 for y in range(total_weights_for_current_layer)])
+    #     # generatuig random weights for the current layer and appending them to the neuron_layers_weights list
+    #     neuron_layers_weights.append([round(random.uniform(-1.00,1.00) * 1000)/1000 for y in range(total_weights_for_current_layer)])
         
-        # looping trough each neuron layer 
-        layers_loop()
+    #     # looping trough each neuron layer 
+    #     layers_loop()
 
 # looping trough each neuron layer
 def layers_loop():
