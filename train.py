@@ -37,9 +37,14 @@ def set_neuron_layer_values(layer_length, input_layer):
 
 # .0
 def init_weights():
-    for _, number_of_leyers in enumerate(neuron_layers_length):
+    layer_weights_length = len(neuron_layers_length) - 1
+    for index, number_of_leyers in enumerate(neuron_layers_length):
+        if index == 0:
+            continue
         # istantiate current layer total number of weights
-        total_weights_for_current_layer = number_of_leyers * len(data) * (len(data) - 1)
+        total_weights_for_current_layer = (
+            number_of_leyers * neuron_layers_length[index - 1] * (len(data) - 1)
+        )
         # random list of numbers from -1 to 1 (3 decimals)
         neuron_layers_weights.append(
             [
