@@ -7,7 +7,8 @@ import random
 
 
 #  START
-
+# current weight index
+weight_index = 0
 # house prices data (suared meters, nr of bathrooms, price)
 data = [[50, 2, 200000], [43, 1, 150000], [40, 1, 143000], [60, 2, 220000]]
 input_layer_length = len(data)
@@ -17,7 +18,7 @@ neuron_layers_length = [input_layer_length, 3, 4, 1]
 # list of all the weights for each neuron (will be randomly generated)
 neuron_layers_weights = []
 # list of all the resulting values for each neuron
-neuron_layers_values = [[x[0] for x in data]]  # the first layer is the data itself
+neuron_layers_values = [[[x[0], x[1]] for x in data]]  # the first layer is the data itself
 
 
 def get_relu(current_neuron, prev_layer, weights, cur_neuron_index):
@@ -59,34 +60,47 @@ def init_weights():
 
 # 1.
 def forward_pass():
-    for cur_layer_index, current_layer_length in enumerate(neuron_layers_length):
-        prev_layer_index = cur_layer_index - 1
-        weight_index = 0
-        if cur_layer_index == 0:
-            # jumping the first layer because it is the input layer and it has no previous layer to calculate the relu and work with
+    # go trough each layer
+    for index, current_layer_length in enumerate(neuron_layers_length):
+        # jump the first layer (the data layer)
+        if index == 0:
             continue
-        else:
-            # calculate relu for the current layer with the weights and neuron values from the previous layers
-            # do this neuron by neuron
-            layer_neuron_pass(cur_layer_index)
-            print("processing each layer")
+        # set the previous layer index
+        prev_layer_index = index - 1
+
+        # go trought each neuron in the current layer
+        current_layer_neuron_loop(current_layer_length, prev_layer_index)
+        # calculate relu for the current layer with the weights and neuron values from the previous layers
+        # do this neuron by neuron
+        # process_previous_layer_neurons(prev_layer_index)
 
 
 # 2.
-def layer_neuron_pass(cur_layer_index):
-    prev_layer_index = cur_layer_index - 1
-    print("processing each neuron")
-    for neuron_index in range(neuron_layers_length[cur_layer_index]):
-        print(
-            "processing neuron index: "
-            + str(neuron_index)
-            + " for layer index: "
-            + str(cur_layer_index)
-        )
-        neuron_layers_values[cur_layer_index] = get_relu(
-            neuron_layers_values[prev_layer_index],
-            neuron_layers_weights[neuron_index],
-        )
+def process_previous_layer_neurons(index):
+    global weight_index
+    # previous layer index
+    prev_layer_index = index - 1
+    print("processing layer: " + str(index))
+    for neuron_index in range(neuron_layers_length[index]):
+        current_layer_length = neuron_layers_length[index]
+        print("weight index: {}".format(weight_index))
+        weight_index = weight_index + 1
+
+        # neuron_layers_values[index] = get_relu(
+        #     neuron_layers_values[prev_layer_index],
+        #     neuron_layers_weights[neuron_index],
+        # )
+
+
+# 3.
+def current_layer_neuron_loop(current_layer_length, prev_layer_index):
+    # loop trough each neuron in the current layer
+    for neuron_index in range(current_layer_length):
+        # loop trough each neuron in the previous layer
+        for prev_neuron_index, prev_neuron_value in enumerate(
+            neuron_layers_values[prev_layer_index]
+        ):
+            print("neuron index: {}".format(neuron_index))
 
 
 def main():
