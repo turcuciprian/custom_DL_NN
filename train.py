@@ -60,7 +60,7 @@ def init_weights():
         )
 
 
-# 1.
+# 1. Starting forward pass
 def forward_pass():
     # go trough each layer
     for index, current_layer_length in enumerate(neuron_layers_length):
@@ -72,12 +72,9 @@ def forward_pass():
 
         # go trought each neuron in the current layer
         current_layer_neuron_loop(current_layer_length, prev_layer_index)
-        # calculate relu for the current layer with the weights and neuron values from the previous layers
-        # do this neuron by neuron
-        # process_previous_layer_neurons(prev_layer_index)
 
 
-# 2.
+# 2. looping trough each layer of neurons
 def process_previous_layer_neurons(index):
     global weight_index
     # previous layer index
@@ -88,13 +85,8 @@ def process_previous_layer_neurons(index):
         print("weight index: {}".format(weight_index))
         weight_index = weight_index + 1
 
-        # neuron_layers_values[index] = get_relu(
-        #     neuron_layers_values[prev_layer_index],
-        #     neuron_layers_weights[neuron_index],
-        # )
 
-
-# 3.
+# 3. looping trough each neuron in the current layer
 def current_layer_neuron_loop(current_layer_length, prev_layer_index):
     # loop trough each neuron in the current layer
     for neuron_index in range(current_layer_length):
@@ -113,6 +105,7 @@ def main():
     #  forwad propagation
     forward_pass()
 
+
 # looping trough each neuron layer
 def layers_loop():
     for neuron_index, neuron_count in enumerate(neuron_layers_length):
@@ -122,4 +115,3 @@ def layers_loop():
 
 main()
 print("done")
-
