@@ -88,13 +88,25 @@ def process_previous_layer_neurons(index):
 
 # 3. looping trough each neuron in the current layer
 def current_layer_neuron_loop(current_layer_length, prev_layer_index):
+    global weight_index
     # loop trough each neuron in the current layer
+    weight_index = 0
     for neuron_index in range(current_layer_length):
         # loop trough each neuron in the previous layer
+        neuron_value = 0
         for prev_neuron_index, prev_neuron_value in enumerate(
             neuron_layers_values[prev_layer_index]
         ):
-            print("neuron index: {}".format(neuron_index))
+            weight = neuron_layers_weights[prev_layer_index][weight_index]
+            # neuron_value = neuron_value + (float(prev_neuron_value[0]) * weight)
+            # neuron_layers_values[prev_layer_index + 1] = [[50, 1]]
+            print(
+                "neuron index: {}, prev neuron index:{}, values:{} weight:{}".format(
+                    neuron_index, prev_neuron_index, prev_neuron_value, weight
+                )
+            )
+            weight_index += 1
+        neuron_layers_values.append([[1, 2], [1, 2], [1, 2]])
 
 
 def main():
@@ -104,6 +116,7 @@ def main():
     init_weights()
     #  forwad propagation
     forward_pass()
+    print('done!')
 
 
 # looping trough each neuron layer
